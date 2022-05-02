@@ -32,9 +32,9 @@ int Threshold = 550;            // Determine which Signal to "count as a beat", 
 const int buttonPin = 15;     // the number of the pushbutton pin
 int buttonState = 0;         // variable for reading the pushbutton status
 
-float latitude , longitude;
-int year , month , date, hour , minute , second;
-String date_str , time_str , lat_str , lng_str;
+float latitude, longitude;
+int year, month, date, hour, minute, second;
+String date_str, time_str, lat_str, lng_str;
 int pm;
 
 void pulse()
@@ -49,8 +49,8 @@ void pulse()
   display.print("Pulse");
   display.setCursor(94, 8);
   display.println(Signal);
-     client.add("Pulse",Signal );
-        client.sendAll(true);
+  client.add("Pulse", Signal );
+  client.sendAll(true);
 
 
 
@@ -74,19 +74,19 @@ void button() {
   // if it is, the buttonState is HIGH:
   if (buttonState == HIGH) {
     // turn LED on:
-  client.add("Need Help",buttonState );
-        client.sendAll(true);
+    client.add("Need Help", buttonState );
+    client.sendAll(true);
 
   } else {
-  client.add("No Problem",buttonState );
-        client.sendAll(true);
+    client.add("No Problem", buttonState );
+    client.sendAll(true);
 
   }
 }
 void setup()
-{ 
-    pinMode(buttonPin, OUTPUT);
- client.wifiConnection(WIFISSID, PASSWORD);
+{
+  pinMode(buttonPin, OUTPUT);
+  client.wifiConnection(WIFISSID, PASSWORD);
   // initialize and clear display
   display.begin(SSD1306_SWITCHCAPVCC, OLED_ADDR);
   display.clearDisplay();
@@ -107,7 +107,7 @@ void setup()
   display.display();
   Serial.begin(115200);
   ss.begin(9600);
-  
+
 
 }
 
@@ -117,7 +117,7 @@ void loop()
   while (ss.available() > 0)
     if (gps.encode(ss.read()))
     {
-   
+
 
       if (gps.date.isValid())
       {
@@ -191,37 +191,33 @@ void loop()
       }
 
     }
-   display.display();
-    if (millis() > 5000 && gps.charsProcessed() < 10)
+  display.display();
+  if (millis() > 5000 && gps.charsProcessed() < 10)
   {
     Serial.println(F("No GPS detected: check wiring."));
     pulse();
-   
+
   }
- 
-   if (gps.location.isValid())
-      {
-        latitude = gps.location.lat();
-        lat_str = String(latitude , 6);
-        Serial.println(lat_str);
-        longitude = gps.location.lng();
-        lng_str = String(longitude , 6);
-         Serial.println(lng_str);
-         display.setCursor(0, 2);
-         display.print("Lat ");
-         display.println(gps.location.lat(), 4);
-         display.print("Long ");
-         display.println(gps.location.lng(), 4);
-        client.add("Latitude", latitude);
-        client.add("Longitude",longitude );
-        client.sendAll(true);
-         pulse();
-         button();
-        
-        
-      }
 
- 
+  if (gps.location.isValid())
+  {
+    latitude = gps.location.lat();
+    lat_str = String(latitude, 6);
+    Serial.println(lat_str);
+    longitude = gps.location.lng();
+    lng_str = String(longitude, 6);
+    Serial.println(lng_str);
+    display.setCursor(0, 2);
+    display.print("Lat ");
+    display.println(gps.location.lat(), 4);
+    display.print("Long ");
+    display.println(gps.location.lng(), 4);
+    client.add("Latitude", latitude);
+    client.add("Longitude", longitude );
+    client.sendAll(true);
+    pulse();
+    button();
 
 
+  }
 }
