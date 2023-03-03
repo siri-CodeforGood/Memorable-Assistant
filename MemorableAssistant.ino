@@ -5,9 +5,9 @@
 #include <SoftwareSerial.h>
 #include <ESP8266WiFi.h>
 #include "UbidotsMicroESP8266.h"
-#define ID "5c054d74c03f973fb97a4b4d" // Put here your Ubidots variable ID ID FOR variable
-#define ID2 "5c054d60c03f973fb97a4b3e" // Put here your Ubidots variable ID MY PROJECT
-#define TOKEN "A1E-yGG36PY2tQewFold78juAves7Z1mkj" // Put here your Ubidots TOKEN
+#define ID "5c054d74c03f973fb97a4b4d" // Put your Ubidots variable ID FOR variable here
+#define ID2 "5c054d60c03f973fb97a4b3e" // Put your Ubidots variable ID for MY PROJECT here
+#define TOKEN "A1E-yGG36PY2tQewFold78juAves7Z1mkj" // Put your Ubidots TOKEN here
 #define WIFISSID "AndroidAP1"
 #define PASSWORD "siricandoit2789"
 Ubidots client(TOKEN);
@@ -24,7 +24,7 @@ Adafruit_SSD1306 display(-1);
 #error("Height incorrect, please fix Adafruit_SSD1306.h!");
 #endif
 int PulseSensorPurplePin = 0;        // Pulse Sensor PURPLE WIRE connected to ANALOG PIN 0
-int LED15 = 15;   //  The on-board Arduion LED
+int LED15 = 15;   //  The on-board Arduino LED
 
 
 int Signal;                // holds the incoming raw data. Signal value can range from 0-1024
